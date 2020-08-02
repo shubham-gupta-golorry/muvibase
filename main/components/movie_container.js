@@ -54,6 +54,7 @@ export default class MovieContainer extends Component {
 const Styles = StyleSheet.create({
   dataContainer: {
     flex: 1,
+    alignItems: 'center',
   },
   listView: {
     marginBottom: 60,

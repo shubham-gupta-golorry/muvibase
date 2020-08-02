@@ -8,7 +8,7 @@ const Images = {
 };
 
 const ImageText = {
-  Home: 'Search for Movies',
+  Home: 'Search for Movies to see results',
   Favs: 'Add some movies to your watch list',
 };
 
