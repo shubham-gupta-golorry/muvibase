@@ -30,37 +30,21 @@ export default class Favorites extends Component {
     }
   };
 
-  _updateFavs = async () => {
-    await AsyncStorage.setItem(
-      'FAV_MOVIES',
-      JSON.stringify(this.state.favsData),
-    );
+  _updateFavs = async (data) => {
+    await AsyncStorage.setItem('FAV_MOVIES', JSON.stringify(data));
   };
 
-  _modifyFavs = (id) => {
+  _removeFavs = (id) => {
     const {favorites, favsData} = this.state;
-    if (favorites.includes(id)) {
-      const newFavs = favorites.filter((fid) => fid !== id);
-      this.setState({favorites: newFavs});
-      Snackbar.show({
-        text: 'Removed from Favorites!',
-        duration: Snackbar.LENGTH_SHORT,
-      });
-      const tempFavData = favsData.filter((data) => data.imdbID !== id);
-      this.setState({favsData: tempFavData});
-      this._updateFavs();
-    } else {
-      favorites.push(id);
-      this.setState({favorites: favorites});
-      Snackbar.show({
-        text: 'Added to Favorites!',
-        duration: Snackbar.LENGTH_SHORT,
-      });
-      const tempFavData = favsData.filter((data) => data.imdbID === id);
-      favsData.push(tempFavData[0]);
-      this.setState({favsData: favsData});
-      this._updateFavs();
-    }
+    const newFavs = favorites.filter((fid) => fid !== id);
+    this.setState({favorites: newFavs});
+    Snackbar.show({
+      text: 'Removed from Favorites!',
+      duration: Snackbar.LENGTH_SHORT,
+    });
+    const tempFavData = favsData.filter((data) => data.imdbID !== id);
+    this.setState({favsData: tempFavData});
+    this._updateFavs(tempFavData);
   };
 
   render() {
@@ -74,7 +58,7 @@ export default class Favorites extends Component {
             movieData={favsData}
             screenCode="favs"
             favorites={favorites}
-            addToFavs={this._modifyFavs}
+            addToFavs={this._removeFavs}
           />
         </View>
       </>
