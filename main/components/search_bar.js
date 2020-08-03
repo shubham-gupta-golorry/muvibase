@@ -1,13 +1,6 @@
 import React, {Component} from 'react';
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import {bool, number, object, string, func} from 'prop-types';
+import {StyleSheet, TextInput, View} from 'react-native';
+import {func} from 'prop-types';
 import Icon from 'react-native-vector-icons/Octicons';
 
 export default class SearchBar extends Component {

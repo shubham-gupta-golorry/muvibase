@@ -9,6 +9,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {func, string, arrayOf} from 'prop-types';
 
+// incase there is no poster from api > use local placeholder
 const noPoster = require('../images/no-art.png');
 
 export default class MovieCard extends Component {
@@ -40,6 +41,7 @@ export default class MovieCard extends Component {
           <TouchableOpacity
             style={Styles.touchableFavIconContainer}
             onPress={() => addToFavs(id)}>
+            {/* conditional rendering of favs icon/button */}
             <Icon
               name={favorites.includes(id) ? 'star' : 'star-outline'}
               size={26}

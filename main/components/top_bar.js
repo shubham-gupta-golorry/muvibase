@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {bool, number, object, string} from 'prop-types';
+import {StyleSheet, Text, View} from 'react-native';
+import {string} from 'prop-types';
+
+// reusable top bar header
 
 export default class TopBar extends Component {
   static propTypes = {

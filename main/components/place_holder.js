@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {bool, number, object, string} from 'prop-types';
+import {Image, StyleSheet, Text, View} from 'react-native';
+import {string} from 'prop-types';
 
 const Images = {
   Home: require('../images/home.png'),

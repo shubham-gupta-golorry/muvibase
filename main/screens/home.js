@@ -9,6 +9,7 @@ import omdb from '../api/omdb.js';
 export default class Home extends Component {
   constructor(props) {
     super(props);
+    // init state
     this.state = {
       movieData: [],
       isLoading: false,
@@ -18,6 +19,7 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
+    // sync favs with local storage
     this._getFavs();
   }
 
@@ -25,8 +27,10 @@ export default class Home extends Component {
     const favsStored = await AsyncStorage.getItem('FAV_MOVIES');
     const favsData = JSON.parse(favsStored);
     if (favsData !== null) {
+      // update favsData from async storage
       this.favsData = favsData;
       const favIds = [];
+      // push fav ids to state
       favsData.map((favData) => {
         favIds.push(favData.imdbID);
       });
@@ -35,16 +39,19 @@ export default class Home extends Component {
   };
 
   _updateFavs = async () => {
+    // update async storage
     await AsyncStorage.setItem('FAV_MOVIES', JSON.stringify(this.favsData));
   };
 
   _handleSearch = async (text) => {
+    // check if search term has enough characters
     if (text.length < 4) {
       Snackbar.show({
         text: 'Please input atleast 4 characters',
         duration: Snackbar.LENGTH_SHORT,
       });
     } else {
+      // handle search > fetch results from omdb abi
       this.setState({isLoading: true});
       try {
         const response = await omdb.get(text);
@@ -59,6 +66,7 @@ export default class Home extends Component {
   };
 
   _modifyFavs = (id) => {
+    //  handle shortlisting of movies
     const {favorites, movieData} = this.state;
     if (favorites.includes(id)) {
       const newFavs = favorites.filter((fid) => fid !== id);
@@ -86,6 +94,7 @@ export default class Home extends Component {
   render() {
     const {} = this.props;
     const {movieData, isLoading, favorites} = this.state;
+    // all reusable components in screen
     return (
       <>
         <TopBar title="Browse Movies" />

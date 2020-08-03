@@ -7,6 +7,8 @@ import {Home, Favorites} from './main/screens/index';
 
 const Tabs = AnimatedTabBarNavigator();
 
+// setup animated tab navigator with two screens > home and favorites
+
 const App = () => {
   return (
     <NavigationContainer>
