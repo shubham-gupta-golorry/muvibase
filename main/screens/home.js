@@ -11,7 +11,6 @@ export default class Home extends Component {
     super(props);
     this.state = {
       movieData: [],
-      didSearch: false,
       isLoading: false,
       favorites: [],
     };
@@ -40,15 +39,22 @@ export default class Home extends Component {
   };
 
   _handleSearch = async (text) => {
-    this.setState({isLoading: true, didSearch: true});
-    try {
-      const response = await omdb.get(text);
-      this.setState({movieData: response.data.Search, isLoading: false});
-    } catch (error) {
+    if (text.length < 4) {
       Snackbar.show({
-        text: error.response.data,
+        text: 'Please input atleast 4 characters',
         duration: Snackbar.LENGTH_SHORT,
       });
+    } else {
+      this.setState({isLoading: true});
+      try {
+        const response = await omdb.get(text);
+        this.setState({movieData: response.data.Search, isLoading: false});
+      } catch (error) {
+        Snackbar.show({
+          text: error.response.data,
+          duration: Snackbar.LENGTH_SHORT,
+        });
+      }
     }
   };
 
